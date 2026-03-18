@@ -118,15 +118,36 @@ html, body {
 }
 
 /* Image: large on desktop/tablet */
-.stromovka_aroshi {
+.stromovka_aroshi, .refsheet_aroshi {
     width: 40vw;
     max-width: 480px;
     height: auto;
     display: block;
     border-radius: 0.5rem;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.45);
+    margin: 20px;
 }
 
+.refsheet_aroshi {
+    /* height: 40vw; */
+    width: 40vw;
+    max-height: 480px;
+}
+.images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px; 
+    width: 70vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-flow: column-reverse;
+}
 /* Mobile adjustments */
 @media (max-width: 720px) {
     .wrapper {
@@ -147,5 +168,8 @@ html, body {
     .links_info img {
         width: 44px;
         height: 44px;
+    }
+    .images {
+        flex-flow: column;
     }
 }
