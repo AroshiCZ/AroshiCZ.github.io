@@ -1,0 +1,3 @@
+import "lib.js";
+
+test();
