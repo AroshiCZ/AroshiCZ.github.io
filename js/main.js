@@ -32,6 +32,13 @@ const links_icons = {
             img : "telegram.png",
             alt : "Telegram link",
             text : "Telegram",
+        },
+        {
+            link: "https://barq.app/@aroshi_cz",
+            img : "barq.png",
+            alt : "Barq link",
+            text : "BARQ!",
+            cssClass : "barq",
         }
     ]
 };
@@ -190,8 +197,12 @@ async function renderLinks(links) {
     }
     for (const link of links.data) {
         let html = template;
-        const classname = link.text.toLowerCase();
-        html = html.replace(/{{classname}}/g, classname);
+        if (link.cssClass) {
+            html = html.replace(/{{classname}}/g, link.cssClass);
+        } else {
+            const classname = link.text.toLowerCase();
+            html = html.replace(/{{classname}}/g, classname);
+        }
         html = html.replace(/{{link}}/g, link.link);
         html = html.replace(/{{img}}/g, links.folder + link.img);
         html = html.replace(/{{alt}}/g, link.alt);

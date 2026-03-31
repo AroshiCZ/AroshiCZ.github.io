@@ -33,7 +33,7 @@
     --mobile-image-width: 90vw;
     --mobile-image-max-width: 320px;
     --mobile-font-size-links: 18px;
-    --mobile-gap: 0.75rem;
+    --mobile-gap:3vh;
     --mobile-icon-size: 44px;
 }
 
@@ -60,6 +60,7 @@ html, body {
 }
 
 .title_aroshi {
+    padding-top: 4vh;
     font-size: clamp(var(--font-size-title-min), 4.5vw, var(--font-size-title-max));
     letter-spacing: var(--letter-spacing);
     text-align: center;
@@ -83,7 +84,7 @@ html, body {
     flex-flow: row wrap;
     justify-content: center;
     gap: var(--gap-small);
-    width: min(90vw, 500px);
+    width: min(70vw, 500px);
     font-size: var(--font-size-links);
 }
 
@@ -93,7 +94,7 @@ html, body {
     display: block;
     transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
 }
-.discord, .instagram, .telegram, .youtube {
+.discord, .instagram, .telegram, .youtube, .barq {
     position: relative;
     display: flex;
     flex-flow: column nowrap;
@@ -107,7 +108,8 @@ html, body {
 .discord::before,
 .instagram::before,
 .youtube::before,
-.telegram::before {
+.telegram::before,
+.barq::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -133,11 +135,15 @@ html, body {
 .telegram::before {
     background: rgba(0, 136, 204, 0.55);
 }
+.barq::before {
+    background: rgba(255, 100, 0, 0.55);
+}
 
 .discord img,
 .instagram img,
 .youtube img,
-.telegram img {
+.telegram img,
+.barq img {
     border-radius: var(--border-radius-full);
     display: block;
     filter: drop-shadow(0 0 var(--blur-glow) var(--shadow-black-light));
@@ -147,7 +153,8 @@ html, body {
 .discord img:hover,
 .instagram img:hover,
 .youtube img:hover,
-.telegram img:hover {
+.telegram img:hover,
+.barq img:hover {
     transform: scale(var(--scale-hover));
     filter: drop-shadow(0 0 var(--blur-glow-hover) var(--shadow-black-medium));
 }
@@ -208,7 +215,7 @@ html, body {
     }
 
     .links_info {
-        width: 100%;
+        width: 70vw;
         font-size: var(--mobile-font-size-links);
         gap: var(--mobile-gap);
     }
