@@ -3,49 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="og:image" content="img/aroshi.png">
+    <link rel="image_src" href="img/aroshi.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="aroshi.png" type="image/png">
+    <link rel="shortcut icon" href="img/aroshi.png" type="image/png">
     <title>Aroshi CZ</title>
 </head>
 <body>
     <div class="wrapper">
         <h1 class="title_aroshi">Aroshi CZ</h1>
         <div class="content">
-            <div class="images">
-                <img src="img/Aroshi-ref_sheet.jpg" alt="reff_sheet" class="refsheet_aroshi">
-                <img src="img/AroshiStromovka.jpg" class="stromovka_aroshi">  
-            </div>
+            
             <!-- LINKS -->
             
-            <div class="links_wrapper">
-
-                <div class="links_info">
-                    <div class="discord">
-                        <a target="_blank" href="https://discord.gg/BXq6DATg7z">
-                            <img src="img/discord.png" alt="Discord Server link">
-                        </a>
-                        <span>Discord</span>
-                    </div> 
-                    <div class="instagram">
-                        <a target="_blank" href="https://www.instagram.com/aroshi_cz/">
-                            <img src="img/Instagram.png" alt="Instagram link">
-                        </a>
-                        <span>Instagram</span>         
-                    </div>
-                    <div class="youtube">
-                        <a target="_blank" href="https://youtube.com/@aroshi_cz">
-                            <img src="img/youtube.png" alt="Youtube link">
-                        </a>
-                        <span>Youtube</span>
-                    </div>
-                    <div class="telegram">
-                        <a target="_blank" href="https://t.me/Aroshi_CZ#">
-                            <img src="img/telegram.png" alt="Telegram link">
-                        </a>
-                        <span>Telegram</span>
-                    </div>
-                </div>
-            </div>
+            
             <div class="info">
                 <h2>About me</h2>
                 <p class="about">
@@ -53,10 +24,8 @@
                 that plays rythm games and shooters (sometimes).</p>
                 <p class="about">You can also know me from Stromovka.</p>
                 <p class="about">I also stream at Twitch or Kick </p>
-                <div class="stream">
-                    <ul class="stream_ul">
-                        <li class="stream_li">Kick - <a href="https://kick.com/spalenarozhledna" target="_blank" rel="noopener noreferrer">Spálená rozhledna</a></li>
-                        <li class="stream_li">Twitch - <a href="https://www.twitch.tv/aroshi_cz" target="_blank" rel="noopener noreferrer">Aroshi_CZ</a></li>
+                <div class="stream" id="stream_container">
+                    <ul class="stream_ul" id="stream_ul">
                     </ul>
                 </div>
                 <p class="about">Here are some games I play:</p>
@@ -85,7 +54,15 @@
                 </div>
                 -->
             </div>
+            <div class="links_wrapper">
 
+                <div class="links_info" id="links_container">
+                </div> 
+            </div>
+            <div class="images">
+                <img src="img/Aroshi-ref_sheet.jpg" alt="reff_sheet" class="refsheet_aroshi">
+                <img src="img/AroshiStromovka.jpg" class="stromovka_aroshi">  
+            </div>
         </div>
     </div>
 

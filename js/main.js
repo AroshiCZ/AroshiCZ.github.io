@@ -5,7 +5,7 @@ const refsheet = "img/Aroshi-ref_sheet.jpg";
 const template_folder = "templates/";
 const links_icons = {
     folder: "img/",
-    container : "",
+    container : "links_container",
     template : "icon.html",
     data : [
         {
@@ -35,7 +35,7 @@ const links_icons = {
     ]
 };
 const links_stream = {
-    container : "",
+    container : "stream_ul",
     template : "stream.html",
     data : [
         {
@@ -61,4 +61,114 @@ const config = {
     links_stream : links_stream,
 }
 
-console.log(config);
+console.log(typeof(links_stream));
+
+function checkDataset(dataset, requiredKeys) {
+    for (const key of requiredKeys) {
+        if (!(key in dataset)) {
+            console.log(`error: missing key ${key}`);
+            return false;
+        }
+    }
+    return true;
+}
+
+async function renderStreams(links) {
+    if (typeof(links) !== "object"){
+        console.log("error with streams")
+        return;
+    }
+    console.log(links);
+    const stream_keys = ["container", "template", "data"];
+    if (!checkDataset(links, stream_keys)) {
+        console.log("error with streams: missing keys");
+        return;
+    }
+    const stream_datakeys = ["name", "link", "platform"];
+    for (const stream of links.data) {
+        if (!checkDataset(stream, stream_datakeys)) {
+            console.log("error with streams: missing keys in data");
+            return;
+        }
+    } 
+
+    const container = document.getElementById(links.container);
+    if (!container) {
+        console.log(`error with streams: container with id ${links.container} not found`);
+        return;
+    }
+    const template = await fetch(config.template_folder + links.template).then(response => {
+        if (!response.ok) {
+            console.log(`error with streams: template ${links.template} not found`);
+            return null;
+        }        return response.text();
+    }).catch(error => {
+        console.log(`error with streams: template ${links.template} not found`);
+        return null;
+    });
+    console.log(template);
+
+    for (const stream of links.data) {
+        // ... validate stream keys ...
+
+        let html = template; 
+        html = html.replace(/{{username}}/g, stream.name);
+        html = html.replace(/{{link}}/g, stream.link);
+        html = html.replace(/{{platform}}/g, stream.platform);
+
+        const temp = document.createElement("template");
+        temp.innerHTML = html.trim();
+        container.appendChild(temp.content.firstElementChild);
+    }
+}
+
+async function renderLinks(links) {
+    if (typeof(links) !== "object"){
+        console.log("error with links")
+        return;
+    }
+    console.log(links);
+    const links_keys = ["folder", "container", "template", "data"];
+    if (!checkDataset(links, links_keys)) {
+        console.log("error with links: missing keys");
+        return;
+    }
+    const links_datakeys = ["link", "img", "alt", "text"];
+    for (const link of links.data) {
+        if (!checkDataset(link, links_datakeys)) {
+            console.log("error with links: missing keys in data");
+            return;
+        }
+    }
+    const container = document.getElementById(links.container);
+    if (!container) {
+        console.log(`error with links: container with id ${links.container} not found`);
+        return;
+    }
+    const template = await fetch(config.template_folder + links.template).then(response => {
+        if (!response.ok) {
+            console.log(`error with links: template ${links.template} not found`);
+            return null;
+        }        
+        return response.text();
+    });
+    console.log(template);
+    for (const link of links.data) {
+        let html = template;
+        const classname = link.text.toLowerCase();
+        html = html.replace(/{{classname}}/g, classname);
+        html = html.replace(/{{link}}/g, link.link);
+        html = html.replace(/{{img}}/g, links.folder + link.img);
+        html = html.replace(/{{alt}}/g, link.alt);
+        html = html.replace(/{{text}}/g, link.text);
+        const temp = document.createElement("template");
+        temp.innerHTML = html.trim();
+        container.appendChild(temp.content.firstElementChild);
+    }
+
+    
+}
+
+document.title = config.title;
+renderLinks(config.links_icons);
+renderStreams(config.links_stream);

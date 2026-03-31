@@ -2,15 +2,48 @@
     --bg-clr: #303030;
     --text-clr: #D0D0D0;
     --default-font: Arial, sans-serif;
+    --link-clr: azure;
+    --glow-white-strong: rgba(255, 255, 255, 0.85);
+    --glow-white-weak: rgba(255, 255, 255, 0.45);
+    --shadow-black-light: rgba(0, 0, 0, 0.35);
+    --shadow-black-medium: rgba(0, 0, 0, 0.4);
+    --shadow-black-strong: rgba(0, 0, 0, 0.45);
+    --transition: 0.25s ease;
+    --border-radius: 0.5rem;
+    --border-radius-full: 50%;
+    --margin-small: 20px;
+    --gap-small: 1rem;
+    --gap-medium: 20px;
+    --font-size-links: 20px;
+    --font-size-title-min: 2.5rem;
+    --font-size-title-max: 3.5rem;
+    --letter-spacing: 0.04em;
+    --margin-title-bottom: 1.5rem;
+    --icon-size: 50px;
+    --image-width: 40vw;
+    --image-max-width: 480px;
+    --image-max-height: 480px;
+    --images-width: 70vw;
+    --blur-glow: 12px;
+    --blur-glow-hover: 18px;
+    --opacity-glow: 0.8;
+    --top-offset: -5px;
+    --scale-hover: 1.08;
+    --mobile-padding: 1.25rem;
+    --mobile-image-width: 90vw;
+    --mobile-image-max-width: 320px;
+    --mobile-font-size-links: 18px;
+    --mobile-gap: 0.75rem;
+    --mobile-icon-size: 44px;
 }
 
 a{
     font-style: normal;
-    color: azure;
+    color: var(--link-clr);
     text-decoration: none;
     text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.85),
-        0 0 9px rgba(255, 255, 255, 0.45);
+        0 0 5px var(--glow-white-strong),
+        0 0 9px var(--glow-white-weak);
 }
 
 a:hover *{
@@ -27,13 +60,13 @@ html, body {
 }
 
 .title_aroshi {
-    font-size: clamp(2.5rem, 4.5vw, 3.5rem);
-    letter-spacing: 0.04em;
+    font-size: clamp(var(--font-size-title-min), 4.5vw, var(--font-size-title-max));
+    letter-spacing: var(--letter-spacing);
     text-align: center;
     text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.85),
-        0 0 18px rgba(255, 255, 255, 0.45);
-    margin: 0 0 1.5rem;
+        0 0 10px var(--glow-white-strong),
+        0 0 18px var(--glow-white-weak);
+    margin: 0 0 var(--margin-title-bottom);
 }
 
 
@@ -43,22 +76,22 @@ html, body {
     align-items: center;
     flex-flow: column;
 
-    margin-top: 20px;
+    margin-top: var(--margin-small);
 }
 .links_info {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--gap-small);
     width: min(90vw, 500px);
-    font-size: 20px;
+    font-size: var(--font-size-links);
 }
 
 .links_info img {
-    width: 50px;
-    height: 50px;
+    width: var(--icon-size);
+    height: var(--icon-size);
     display: block;
-    transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+    transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
 }
 .discord, .instagram, .telegram, .youtube {
     position: relative;
@@ -78,11 +111,11 @@ html, body {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 50%;
+    border-radius: var(--border-radius-full);
     z-index: 0;
-    opacity: 0.8;
-    filter: blur(12px);
-    top: -5px;
+    opacity: var(--opacity-glow);
+    filter: blur(var(--blur-glow));
+    top: var(--top-offset);
 }
 
 .discord::before {
@@ -105,18 +138,18 @@ html, body {
 .instagram img,
 .youtube img,
 .telegram img {
-    border-radius: 50%;
+    border-radius: var(--border-radius-full);
     display: block;
-    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.35));
-    transition: transform 0.25s ease, filter 0.25s ease;
+    filter: drop-shadow(0 0 var(--blur-glow) var(--shadow-black-light));
+    transition: transform var(--transition), filter var(--transition);
 }
 
 .discord img:hover,
 .instagram img:hover,
 .youtube img:hover,
 .telegram img:hover {
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.4));
+    transform: scale(var(--scale-hover));
+    filter: drop-shadow(0 0 var(--blur-glow-hover) var(--shadow-black-medium));
 }
 
 .wrapper {
@@ -132,68 +165,68 @@ html, body {
 
 /* Image: large on desktop/tablet */
 .stromovka_aroshi, .refsheet_aroshi {
-    width: 40vw;
-    max-width: 480px;
+    width: var(--image-width);
+    max-width: var(--image-max-width);
     height: auto;
     display: block;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.45);
-    margin: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 16px var(--shadow-black-strong);
+    margin: var(--margin-small);
 }
 
 .refsheet_aroshi {
     /* height: 40vw; */
-    width: 40vw;
-    max-height: 480px;
+    width: var(--image-width);
+    max-height: var(--image-max-height);
 }
 .images {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(1, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px; 
-    width: 70vw;
+    grid-column-gap: var(--gap-medium);
+    grid-row-gap: var(--gap-medium); 
+    width: var(--images-width);
     justify-content: center;
     align-items: center;
 }
 
 .content {
     display: flex;
-    flex-flow: column-reverse;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
 }
 /* Mobile adjustments */
 @media (max-width: 720px) {
     .wrapper {
-        padding: 1.25rem;
+        padding: var(--mobile-padding);
     }
 
     .stromovka_aroshi {
-        width: 90vw;
-        max-width: 320px;
+        width: var(--mobile-image-width);
+        max-width: var(--mobile-image-max-width);
     }
 
     .links_info {
         width: 100%;
-        font-size: 18px;
-        gap: 0.75rem;
+        font-size: var(--mobile-font-size-links);
+        gap: var(--mobile-gap);
     }
 
     .links_info img {
-        width: 44px;
-        height: 44px;
+        width: var(--mobile-icon-size);
+        height: var(--mobile-icon-size);
     }
     .images {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        grid-column-gap: 20px;
-        grid-row-gap: 20px; 
+        grid-column-gap: var(--gap-medium);
+        grid-row-gap: var(--gap-medium); 
         align-items: center;
         justify-content: center;
     }
     .refsheet_aroshi {
-        width: 90vw;
-        max-width: 320px;
+        width: var(--mobile-image-width);
+        max-width: var(--mobile-image-max-width);
     }
 }
