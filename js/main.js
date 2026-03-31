@@ -3,6 +3,7 @@ const email = "aroshicz@email.cz";
 const rel = "img/aroshi.png";
 const refsheet = "img/Aroshi-ref_sheet.jpg";
 const template_folder = "templates/";
+const debugLogs = false;
 const links_icons = {
     folder: "img/",
     container : "links_container",
@@ -61,12 +62,16 @@ const config = {
     links_stream : links_stream,
 }
 
-console.log(typeof(links_stream));
+if (debugLogs) {
+    console.log(typeof(links_stream));
+}
 
 function checkDataset(dataset, requiredKeys) {
     for (const key of requiredKeys) {
         if (!(key in dataset)) {
-            console.log(`error: missing key ${key}`);
+            if (debugLogs) {
+                console.log(`error: missing key ${key}`);
+            }
             return false;
         }
     }
@@ -75,38 +80,54 @@ function checkDataset(dataset, requiredKeys) {
 
 async function renderStreams(links) {
     if (typeof(links) !== "object"){
-        console.log("error with streams")
+        if (debugLogs) {
+            console.log("error with streams")
+        }
         return;
     }
-    console.log(links);
+    if (debugLogs) {
+        console.log(links);
+    }
     const stream_keys = ["container", "template", "data"];
     if (!checkDataset(links, stream_keys)) {
-        console.log("error with streams: missing keys");
+        if (debugLogs) {
+            console.log("error with streams: missing keys");
+        }
         return;
     }
     const stream_datakeys = ["name", "link", "platform"];
     for (const stream of links.data) {
         if (!checkDataset(stream, stream_datakeys)) {
-            console.log("error with streams: missing keys in data");
+            if (debugLogs) {
+                console.log("error with streams: missing keys in data");
+            }
             return;
         }
     } 
 
     const container = document.getElementById(links.container);
     if (!container) {
-        console.log(`error with streams: container with id ${links.container} not found`);
+        if (debugLogs) {
+            console.log(`error with streams: container with id ${links.container} not found`);
+        }
         return;
     }
     const template = await fetch(config.template_folder + links.template).then(response => {
         if (!response.ok) {
-            console.log(`error with streams: template ${links.template} not found`);
+            if (debugLogs) {
+                console.log(`error with streams: template ${links.template} not found`);
+            }
             return null;
         }        return response.text();
     }).catch(error => {
-        console.log(`error with streams: template ${links.template} not found`);
+        if (debugLogs) {
+            console.log(`error with streams: template ${links.template} not found`);
+        }
         return null;
     });
-    console.log(template);
+    if (debugLogs) {
+        console.log(template);
+    }
 
     for (const stream of links.data) {
         // ... validate stream keys ...
@@ -124,35 +145,49 @@ async function renderStreams(links) {
 
 async function renderLinks(links) {
     if (typeof(links) !== "object"){
-        console.log("error with links")
+        if (debugLogs) {
+            console.log("error with links")
+        }
         return;
     }
-    console.log(links);
+    if (debugLogs) {
+        console.log(links);
+    }
     const links_keys = ["folder", "container", "template", "data"];
     if (!checkDataset(links, links_keys)) {
-        console.log("error with links: missing keys");
+        if (debugLogs) {
+            console.log("error with links: missing keys");
+        }
         return;
     }
     const links_datakeys = ["link", "img", "alt", "text"];
     for (const link of links.data) {
         if (!checkDataset(link, links_datakeys)) {
-            console.log("error with links: missing keys in data");
+            if (debugLogs) {
+                console.log("error with links: missing keys in data");
+            }
             return;
         }
     }
     const container = document.getElementById(links.container);
     if (!container) {
-        console.log(`error with links: container with id ${links.container} not found`);
+        if (debugLogs) {
+            console.log(`error with links: container with id ${links.container} not found`);
+        }
         return;
     }
     const template = await fetch(config.template_folder + links.template).then(response => {
         if (!response.ok) {
-            console.log(`error with links: template ${links.template} not found`);
+            if (debugLogs) {
+                console.log(`error with links: template ${links.template} not found`);
+            }
             return null;
         }        
         return response.text();
     });
-    console.log(template);
+    if (debugLogs) {
+        console.log(template);
+    }
     for (const link of links.data) {
         let html = template;
         const classname = link.text.toLowerCase();
